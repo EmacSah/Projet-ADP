@@ -5,6 +5,8 @@ import numpy as np
 from pathlib import Path
 import os
 import sys
+import subprocess
+import importlib
 
 
 # Ajout du chemin du projet au PYTHONPATH
@@ -22,16 +24,35 @@ sys.path.insert(0, str(current_dir))
 #from src.modeling import SuperstoreModel
 #from src.utils import create_kpi_metrics, create_confusion_matrix_plot, download_predictions
 
+def install_packages():
+    packages = [
+        "plotly",
+        "plotly-express",
+        "kaleido"
+    ]
+    for package in packages:
+        try:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "--user", package])
+            # Forcer le rechargement après installation
+            if package in sys.modules:
+                importlib.reload(sys.modules[package])
+        except Exception as e:
+            st.error(f"Erreur lors de l'installation de {package}: {str(e)}")
+            return False
+    return True
+
 
 # Gestion de l'importation de plotly
 try:
 	import plotly.express as px
 	import plotly.graph_objects as go
 except ImportError:
-	st.error("Erreur lors de l'importation de plotly. Installation des dépendances...")
-	os.system('pip install plotly==5.18.0 plotly-express==0.4.1 kaleido==0.2.1')
-	import plotly.express as px
-	import plotly.graph_objects as go
+    st.warning("Installation des dépendances requises...")
+    if install_packages():
+        st.experimental_rerun()
+    else:
+        st.error("Impossible d'installer les dépendances requises.")
+        st.stop()
 
 try:
 	from src.dependencies import import_dependencies

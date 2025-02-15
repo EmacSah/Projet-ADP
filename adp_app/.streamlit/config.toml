@@ -1,9 +1,17 @@
 [server]
 enableCORS = false
 enableXsrfProtection = false
+maxUploadSize = 200
 
 [browser]
 gatherUsageStats = false
+
+[runner]
+magicEnabled = true
+installTracker = true
+
+[client]
+showErrorDetails = true
 
 [theme]
 primaryColor = "#FF4B4B"
