@@ -41,9 +41,9 @@ streamlit run app.py
 
 ## Structure du projet
 
-adp_app/                      
-├── .streamlit/              
-│   └── config.toml         # Fichier de configuration
+adp_app/
+├── .streamlit/
+│   └── config.toml
 ├── data/
 │   └── Superstore2023.xlsx
 ├── src/
@@ -53,5 +53,6 @@ adp_app/
 │   ├── modeling.py
 │   └── utils.py
 ├── requirements.txt
+├── setup.py
 ├── README.md
 └── app.py
