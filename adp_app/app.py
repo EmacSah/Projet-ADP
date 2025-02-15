@@ -23,15 +23,7 @@ sys.path.insert(0, str(current_dir))
 #from src.utils import create_kpi_metrics, create_confusion_matrix_plot, download_predictions
 
 
-# Gestion de l'importation de plotly
-try:
-    import plotly.express as px
-    import plotly.graph_objects as go
-except ImportError:
-    st.error("Erreur lors de l'importation de plotly. Installation des dépendances...")
-    os.system('pip install plotly==5.18.0 plotly-express==0.4.1 kaleido==0.2.1')
-    import plotly.express as px
-    import plotly.graph_objects as go
+
 
 try:
     from src.data_processing import load_data, clean_data, prepare_model_data
