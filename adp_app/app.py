@@ -14,13 +14,38 @@ import sys
 current_dir = Path(__file__).parent.absolute()
 sys.path.insert(0, str(current_dir))
 
-from src.data_processing import load_data, clean_data, prepare_model_data
-from src.visualization import (
-    create_sales_by_region, create_profit_by_category,
-    create_monthly_sales_trend, create_segment_distribution
-)
-from src.modeling import SuperstoreModel
-from src.utils import create_kpi_metrics, create_confusion_matrix_plot, download_predictions
+#from src.data_processing import load_data, clean_data, prepare_model_data
+#from src.visualization import (
+ #   create_sales_by_region, create_profit_by_category,
+  #  create_monthly_sales_trend, create_segment_distribution
+#)
+#from src.modeling import SuperstoreModel
+#from src.utils import create_kpi_metrics, create_confusion_matrix_plot, download_predictions
+
+
+# Gestion de l'importation de plotly
+try:
+    import plotly.express as px
+    import plotly.graph_objects as go
+except ImportError:
+    st.error("Erreur lors de l'importation de plotly. Installation des dépendances...")
+    os.system('pip install plotly==5.18.0 plotly-express==0.4.1 kaleido==0.2.1')
+    import plotly.express as px
+    import plotly.graph_objects as go
+
+try:
+    from src.data_processing import load_data, clean_data, prepare_model_data
+    from src.visualization import (
+        create_sales_by_region, create_profit_by_category,
+        create_monthly_sales_trend, create_segment_distribution
+    )
+    from src.modeling import SuperstoreModel
+    from src.utils import create_kpi_metrics, create_confusion_matrix_plot, download_predictions
+except Exception as e:
+    st.error(f"Erreur d'importation : {e}")
+    st.stop()
+
+
 
 # Configuration de la page
 st.set_page_config(
