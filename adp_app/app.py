@@ -1,4 +1,10 @@
 import streamlit as st
+import sys
+from pathlib import Path
+# Ajout du chemin du projet au PYTHONPATH
+file_path = Path(__file__).parent.resolve()
+sys.path.append(str(file_path))
+
 from src.data_processing import load_data, clean_data, prepare_model_data
 from src.visualization import (
     create_sales_by_region, create_profit_by_category,

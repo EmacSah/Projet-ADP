@@ -1,12 +1,15 @@
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 
 def load_data():
     """Charge et prépare les données initiales"""
     try:
-        df = pd.read_excel('data/Superstore2023.xlsx', sheet_name="Superstore2023")
+        # Utilisation de Path pour gérer les chemins de fichiers
+        file_path = Path(__file__).parent.parent / 'data' / 'Superstore2023.xlsx'
+        df = pd.read_excel(str(file_path), sheet_name="Superstore2023")
         return df
     except Exception as e:
         raise Exception(f"Erreur lors du chargement des données: {e}")
