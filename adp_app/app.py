@@ -1,9 +1,18 @@
 import streamlit as st
-import sys
+import pandas as pd
+import numpy as np
+import plotly.express as px
 from pathlib import Path
+import os
+import sys
+
+
 # Ajout du chemin du projet au PYTHONPATH
-file_path = Path(__file__).parent.resolve()
-sys.path.append(str(file_path))
+#file_path = Path(__file__).parent.resolve()
+#sys.path.append(str(file_path))
+
+current_dir = Path(__file__).parent.absolute()
+sys.path.insert(0, str(current_dir))
 
 from src.data_processing import load_data, clean_data, prepare_model_data
 from src.visualization import (

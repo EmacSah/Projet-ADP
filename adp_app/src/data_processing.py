@@ -1,18 +1,32 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.model_selection import train_test_split
+import os
+
+
+try:
+    from sklearn.preprocessing import LabelEncoder, StandardScaler
+    from sklearn.model_selection import train_test_split
+except ImportError:
+    raise ImportError("Erreur lors de l'importation de scikit-learn. Vérifiez l'installation.")
+    
+#from sklearn.preprocessing import LabelEncoder, StandardScaler
+#from sklearn.model_selection import train_test_split
 
 def load_data():
     """Charge et prépare les données initiales"""
     try:
-        # Utilisation de Path pour gérer les chemins de fichiers
-        file_path = Path(__file__).parent.parent / 'data' / 'Superstore2023.xlsx'
+        # Utilisation du chemin relatif par rapport au fichier actuel
+        current_dir = Path(__file__).parent.parent
+        file_path = current_dir / 'data' / 'Superstore2023.xlsx'
+        
+        if not file_path.exists():
+            raise FileNotFoundError(f"Le fichier n'existe pas: {file_path}")
+            
         df = pd.read_excel(str(file_path), sheet_name="Superstore2023")
         return df
     except Exception as e:
-        raise Exception(f"Erreur lors du chargement des données: {e}")
+        raise Exception(f"Erreur lors du chargement des données: {str(e)}")
 
 def clean_data(df):
     """Nettoie et prépare les données"""
